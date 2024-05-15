@@ -1,4 +1,4 @@
-use std::net::SocketAddr;
+use std::{env, net::SocketAddr};
 
 use axum::Router;
 use sqlx::{mysql::MySqlPoolOptions, MySql, Pool};
@@ -13,9 +13,13 @@ pub struct AppState {
 
 #[tokio::main]
 async fn main() {
+    // initialize env file
+    dotenv::dotenv().expect("The .env file does not exist");
+
+    let db_dsn = env::var("DATABASE_DSN").unwrap_or_default();
     // initialize database connect pool
     let db = MySqlPoolOptions::new()
-        .connect("mysql://root:@127.0.0.1:3306/aksum_std")
+        .connect(&db_dsn)
         .await
         .unwrap();
 
