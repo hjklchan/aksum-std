@@ -29,7 +29,8 @@ async fn main() {
         .nest("/tickets", routes::tickets_router());
 
     // create a tcp listener
-    let addr = SocketAddr::from(([127, 0, 0, 1], 8899));
+    let port: u16 = env::var("PORT").unwrap_or("9000".into()).parse().unwrap();
+    let addr = SocketAddr::from(([127, 0, 0, 1], port));
     let tcp_listener = TcpListener::bind(addr).await.unwrap();
     println!("Listening on http://{}", addr);
 
