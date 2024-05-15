@@ -1,11 +1,16 @@
-use axum::{
-    routing,
-    Router,
-};
-
-use self::tickets::{create_handler, delete_handler, get_handler, update_handler};
+use axum::{routing, Router};
 
 mod tickets;
+mod users;
+
+use self::{
+    tickets::{create_handler, delete_handler, get_handler, update_handler},
+    users::login_handler,
+};
+
+pub fn users_router() -> Router {
+    Router::new().route("/users/login", routing::post(login_handler))
+}
 
 pub fn tickets_router() -> Router {
     Router::new()

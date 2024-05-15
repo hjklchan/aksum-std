@@ -26,6 +26,7 @@ async fn main() {
     let app = Router::new()
         .layer(cors_layer())
         .with_state(app_state)
+        .nest("/users", routes::users_router())
         .nest("/tickets", routes::tickets_router());
 
     // create a tcp listener
