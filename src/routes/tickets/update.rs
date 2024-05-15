@@ -1,5 +1,5 @@
-use axum::response::IntoResponse;
+use axum::{extract::Path, response::IntoResponse};
 
-pub async fn update_handler() -> impl IntoResponse {
-    "Update ticket handler"
+pub async fn update_handler(Path(id): Path<u64>) -> impl IntoResponse {
+    format!("Update ticket by id#{id}")
 }
