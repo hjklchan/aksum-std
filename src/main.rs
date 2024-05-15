@@ -3,6 +3,7 @@ use std::{env, net::SocketAddr};
 use axum::Router;
 use sqlx::{mysql::MySqlPoolOptions, MySql, Pool};
 use tokio::net::TcpListener;
+use tower_http::cors::{self, CorsLayer};
 
 mod routes;
 
@@ -18,14 +19,12 @@ async fn main() {
 
     let db_dsn = env::var("DATABASE_DSN").unwrap_or_default();
     // initialize database connect pool
-    let db = MySqlPoolOptions::new()
-        .connect(&db_dsn)
-        .await
-        .unwrap();
+    let db = MySqlPoolOptions::new().connect(&db_dsn).await.unwrap();
 
     // initialize state and app instance
     let app_state = AppState { db };
     let app = Router::new()
+        .layer(cors_layer())
         .with_state(app_state)
         .nest("/tickets", routes::tickets_router());
 
@@ -36,4 +35,12 @@ async fn main() {
 
     // run http server
     axum::serve(tcp_listener, app).await.unwrap();
+}
+
+// CORS layer
+fn cors_layer() -> CorsLayer {
+    CorsLayer::new()
+        .allow_headers(cors::Any)
+        .allow_methods(cors::Any)
+        .allow_origin(cors::Any)
 }
