@@ -31,6 +31,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "aksum-std"
+version = "0.1.0"
+dependencies = [
+ "axum",
+ "dotenv",
+ "serde",
+ "serde_json",
+ "sqlx",
+ "tokio",
+ "tower-http",
+]
+
+[[package]]
 name = "allocator-api2"
 version = "0.2.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -264,19 +277,6 @@ dependencies = [
  "tower-layer",
  "tower-service",
  "tracing",
-]
-
-[[package]]
-name = "axum-std-api"
-version = "0.1.0"
-dependencies = [
- "axum",
- "dotenv",
- "serde",
- "serde_json",
- "sqlx",
- "tokio",
- "tower-http",
 ]
 
 [[package]]
