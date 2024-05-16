@@ -1,6 +1,6 @@
 use std::{env, net::SocketAddr};
 
-use axum::{extract::State, response::IntoResponse, routing, Router};
+use axum::{routing, Router};
 use sqlx::{mysql::MySqlPoolOptions, MySql, Pool};
 use tokio::net::TcpListener;
 use tower_http::cors::{self, CorsLayer};

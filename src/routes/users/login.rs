@@ -1,9 +1,7 @@
-use std::sync::Arc;
-
 use crate::{models::UserModel, AppState};
-use axum::{extract::State, http::StatusCode, response::IntoResponse, Json};
+use axum::{extract::State, response::IntoResponse, Json};
 use serde::{Deserialize, Serialize};
-use sqlx::{MySql, Pool};
+// use sqlx::{MySql, Pool};
 
 #[derive(Debug, Deserialize)]
 pub struct LoginReq {

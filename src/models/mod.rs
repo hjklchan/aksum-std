@@ -1,4 +1,5 @@
 
 mod user;
 
-pub use user::{UserModel};
+#[allow(unused)]
+pub use user::UserModel;
