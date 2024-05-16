@@ -1,10 +1,11 @@
 use std::{env, net::SocketAddr};
 
-use axum::Router;
+use axum::{extract::State, response::IntoResponse, routing, Router};
 use sqlx::{mysql::MySqlPoolOptions, MySql, Pool};
 use tokio::net::TcpListener;
 use tower_http::cors::{self, CorsLayer};
 
+mod models;
 mod routes;
 
 #[derive(Clone)]
@@ -23,11 +24,23 @@ async fn main() {
 
     // initialize state and app instance
     let app_state = AppState { db };
-    let app = Router::new()
+    // ! Should move the catalogue for management
+    let app: Router = Router::new()
         .layer(cors_layer())
-        .with_state(app_state)
-        .nest("/users", routes::users_router())
-        .nest("/tickets", routes::tickets_router());
+        .nest(
+            "/users",
+            Router::new().route("/login", routing::post(routes::users::login_handler)),
+        )
+        .nest(
+            "tickets",
+            Router::new()
+                .route("/", routing::get(routes::tickets::list_handler))
+                .route("/:id", routing::get(routes::tickets::get_handler))
+                .route("/", routing::post(routes::tickets::create_handler))
+                .route("/:id", routing::delete(routes::tickets::delete_handler))
+                .route("/:id", routing::patch(routes::tickets::update_handler)),
+        )
+        .with_state(app_state);
 
     // create a tcp listener
     let port: u16 = env::var("PORT").unwrap_or("9000".into()).parse().unwrap();
