@@ -1,4 +1,4 @@
-use crate::{models::UserModel, AppState};
+use crate::AppState;
 use axum::{extract::State, response::IntoResponse, Json};
 use serde::{Deserialize, Serialize};
 // use sqlx::{MySql, Pool};
