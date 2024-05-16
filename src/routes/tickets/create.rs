@@ -6,6 +6,7 @@ pub enum TicketStatus {
     Todo, InProgress, UnderReview, Done
 }
 
+#[allow(unused)]
 #[derive(Debug, Deserialize)]
 pub struct CreateReq {
     title: String,
