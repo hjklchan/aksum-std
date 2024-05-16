@@ -1,0 +1,25 @@
+{
+  "db_name": "MySQL",
+  "query": "SELECT EXISTS ( SELECT 1 FROM `users` WHERE `email` = ? ) AS `exists!`",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "exists!",
+        "type_info": {
+          "type": "LongLong",
+          "flags": "NOT_NULL | BINARY",
+          "char_set": 63,
+          "max_size": 1
+        }
+      }
+    ],
+    "parameters": {
+      "Right": 1
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "ccebe345c4d7e8fb14fff12e0d9e271bd666c2b218b92713513970e26a9c0e30"
+}
