@@ -32,7 +32,7 @@ async fn main() {
             Router::new().route("/login", routing::post(routes::users::login_handler)),
         )
         .nest(
-            "tickets",
+            "/tickets",
             Router::new()
                 .route("/", routing::get(routes::tickets::list_handler))
                 .route("/:id", routing::get(routes::tickets::get_handler))
