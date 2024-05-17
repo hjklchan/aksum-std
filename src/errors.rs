@@ -5,9 +5,9 @@ use serde_json::error;
 pub enum Error {
     #[error("{0}")]
     BadRequest(String),
-    #[error("{0} dose not exist")]
+    #[error("{0} not found")]
     NotFound(&'static str),
-    #[error("route dose not exist")]
+    #[error("route not found")]
     RouteNotFound,
     #[error("{0} already exist")]
     AlreadyExist(&'static str),
