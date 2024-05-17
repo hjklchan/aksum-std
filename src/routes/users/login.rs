@@ -50,7 +50,12 @@ pub async fn login_handler(
         id: row.id as usize,
         username: row.username,
         status: row.status,
-    }).map_err(|err| Error::Sqlxxx(err))?;
+    }).map_err(|err| {
+        match err {
+            sqlx::Error::RowNotFound => return Error::bad_request("incorrect user password".into()),
+            _ => Error::Sqlxxx(err)
+        }
+    })?;
 
     // ? I don't know what the locked-in numbers are
     if result.status == 1 {
