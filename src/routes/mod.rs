@@ -5,6 +5,8 @@
 pub mod tickets;
 pub mod users;
 
+pub mod not_found;
+
 // FIXME: Missing `State` in sub-routes
 // pub fn users_router() -> Router {
 //     Router::new().route("/users/login", routing::post(users::login_handler))
