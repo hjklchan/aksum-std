@@ -59,7 +59,7 @@ pub async fn login_handler(
         )));
     }
 
-    // TODO: Generate token here
+    // Generate token here
     let claims = OhMyClaims {
         user_id: result.id as usize,
         username: result.username,
