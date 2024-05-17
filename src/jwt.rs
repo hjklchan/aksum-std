@@ -4,5 +4,5 @@ use serde::{Deserialize, Serialize};
 pub struct OhMyClaims {
     pub user_id: usize,
     pub username: String,
-    pub exp: usize
+    pub exp: usize,
 }
