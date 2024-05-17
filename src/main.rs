@@ -5,9 +5,10 @@ use sqlx::{mysql::MySqlPoolOptions, MySql, Pool};
 use tokio::net::TcpListener;
 use tower_http::cors::{self, CorsLayer};
 
+mod errors;
+mod jwt;
 mod models;
 mod routes;
-mod errors;
 
 #[derive(Clone)]
 pub struct AppState {
