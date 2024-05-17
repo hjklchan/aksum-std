@@ -31,15 +31,24 @@ async fn main() {
         .layer(cors_layer())
         .nest(
             "/users",
-            Router::new().route("/login", routing::post(routes::users::login_handler)),
+            Router::new()
+                // Login
+                .route("/login", routing::post(routes::users::login_handler))
+                // Register
+                .route("/register", routing::post(routes::users::register_handler)),
         )
         .nest(
             "/tickets",
             Router::new()
+                // Get ticket list
                 .route("/", routing::get(routes::tickets::list_handler))
+                // Get ticket by id
                 .route("/:id", routing::get(routes::tickets::get_handler))
+                // Create ticket
                 .route("/", routing::post(routes::tickets::create_handler))
+                // Delete ticket
                 .route("/:id", routing::delete(routes::tickets::delete_handler))
+                // Update ticket
                 .route("/:id", routing::patch(routes::tickets::update_handler)),
         )
         .with_state(app_state);
