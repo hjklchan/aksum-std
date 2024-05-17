@@ -51,6 +51,7 @@ async fn main() {
                 // Update ticket
                 .route("/:id", routing::patch(routes::tickets::update_handler)),
         )
+        .fallback(routes::not_found::route_not_found_handler)
         .with_state(app_state);
 
     // create a tcp listener
