@@ -2,7 +2,6 @@
 
 // use crate::AppState;
 
-
 pub mod tickets;
 pub mod users;
 

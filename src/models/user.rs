@@ -1,4 +1,2 @@
-
 #[allow(unused)]
-pub struct UserModel {
-}
+pub struct UserModel {}

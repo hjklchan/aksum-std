@@ -3,7 +3,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Serialize)]
 pub enum TicketStatus {
-    Todo, InProgress, UnderReview, Done
+    Todo,
+    InProgress,
+    UnderReview,
+    Done,
 }
 
 #[allow(unused)]
@@ -17,8 +20,7 @@ pub struct CreateReq {
 }
 
 #[allow(dead_code)]
-struct CreateRep {
-}
+struct CreateRep {}
 
 pub async fn create_handler(Json(req): Json<CreateReq>) -> impl IntoResponse {
     println!("{:#?}", req);
