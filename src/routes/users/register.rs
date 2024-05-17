@@ -1,4 +1,4 @@
-use crate::{errors::Error, jwt::OhMyClaims};
+use crate::errors::Error;
 use axum::{extract::State, http::StatusCode, Json};
 use serde::{Deserialize, Serialize};
 
