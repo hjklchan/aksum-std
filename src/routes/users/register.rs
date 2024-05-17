@@ -35,9 +35,11 @@ pub async fn register_handler(
         return Err(Error::AlreadyExist("user"));
     }
 
+    // TODO: crypt password
+
     // Create new user
     sqlx::query!(
-        "INSERT INTO `users`(`username`, `email`, `password`, `status`) VALUES(?, ?, ?, ?)",
+        "INSERT INTO `users`(`username`, `email`, `password`, `status`, `created_at`, `updated_at`) VALUES(?, ?, ?, ?, NOW(), NOW())",
         &payload.email,
         &payload.email,
         // TODO: Should encrypt the password
@@ -48,6 +50,6 @@ pub async fn register_handler(
     .await
     .map(|_| ())
     .map_err(|err| Error::Sqlxxx(err))?;
-    
+
     Ok(StatusCode::CREATED)
 }
