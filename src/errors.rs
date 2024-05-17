@@ -9,8 +9,8 @@ pub enum Error {
     NotFound(&'static str),
     #[error("route dose not exist")]
     RouteNotFound,
-    #[error("resource already exist")]
-    AlreadyExist,
+    #[error("{0} already exist")]
+    AlreadyExist(&'static str),
 
     #[error("{0}")]
     Sqlxxx(#[from] sqlx::Error),
@@ -25,7 +25,7 @@ impl Error {
             // 4xx related
             Self::NotFound(_) => StatusCode::NOT_FOUND,
             Self::RouteNotFound => StatusCode::NOT_FOUND,
-            Self::AlreadyExist => StatusCode::BAD_REQUEST,
+            Self::AlreadyExist(_) => StatusCode::BAD_REQUEST,
             Self::BadRequest(_) => StatusCode::BAD_REQUEST,
             Self::Authenticate(AuthenticateError::Locked(_)) => StatusCode::LOCKED,
             Self::Authenticate(AuthenticateError::InvalidToken) => StatusCode::BAD_REQUEST,
