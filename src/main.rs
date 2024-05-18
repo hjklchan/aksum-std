@@ -4,6 +4,7 @@ use axum::{routing, Router};
 use sqlx::{mysql::MySqlPoolOptions, MySql, Pool};
 use tokio::net::TcpListener;
 use tower_http::cors::{self, CorsLayer};
+use tracing::info;
 
 mod errors;
 mod jwt;
@@ -17,6 +18,8 @@ pub struct AppState {
 
 #[tokio::main]
 async fn main() {
+    tracing_subscriber::fmt::init();
+
     // initialize env file
     dotenv::dotenv().expect("The .env file does not exist");
 
