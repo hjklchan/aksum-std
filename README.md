@@ -5,7 +5,7 @@
 cargo install sqlx-cli
 ```
 ### Migration Usage
-```
+```bash
 # Create migration files with up and down
 sqlx migrate -r create_xxx_table
 
